@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Core Banking - Sistema de Pago Móvil B2C / P2P</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="bank-container">
+        <!-- BARRA SUPERIOR DE ESTADO TÉCNICO -->
+        <div class="top-system-bar">
+            <span>Core Banking v2.4</span>
+            <span class="status-badge"><span class="dot"></span> IBM DB2 Connected</span>
+        </div>
+
+        <!-- HEADER PRINCIPAL -->
+        <header class="bank-header">
+            <div class="header-info">
+                <h2>Portal Finanzas Persona</h2>
+                <small>Cuenta Corriente No. 0105-****-****-8812</small>
+            </div>
+            <div class="balance-card">
+                <div class="balance-top-row">
+                    <span class="balance-label">Saldo Disponible Consolidado</span>
+                    <div class="account-actions">
+                        <button id="btn-recharge" class="btn-mini" title="Simular Depósito/Recarga">+ Abonar</button>
+                        <button id="btn-reset" class="btn-mini-danger" title="Reiniciar Datos">Reset</button>
+                    </div>
+                </div>
+                <h1 id="user-balance">Bs. 2.500,00</h1>
+            </div>
+        </header>
+
+        <!-- FORMULARIO DE PAGO MÓVIL P2P -->
+        <section class="payment-section">
+            <div class="section-title">
+                <h3>📲 Módulo de Transferencia P2P / Pago Móvil</h3>
+            </div>
+            
+            <form id="payment-form">
+                <div class="form-group">
+                    <label>Institución Financiera Destino:</label>
+                    <select id="dest-bank" required>
+                        <option value="">-- Seleccione el banco emisor/receptor --</option>
+                        <option value="0105">0105 - Banco Mercantil</option>
+                        <option value="0191">0191 - Banco Nacional de Crédito (BNC)</option>
+                        <option value="0102">0102 - Banco de Venezuela (BDV)</option>
+                        <option value="0134">0134 - Banesco Banco Universal</option>
+                        <option value="0108">0108 - BBVA Provincial</option>
+                        <option value="0172">0172 - Bancamiga Banco Universal</option>
+                        <option value="0104">0104 - Venezolano de Crédito</option>
+                        <option value="0168">0168 - Bancrecer</option>
+                        <option value="0115">0115 - Banco Exterior</option>
+                        <option value="0128">0128 - Banco Caroní</option>
+                        <option value="0163">0163 - Banco del Tesoro</option>
+                        <option value="0175">0175 - Banco Bicentenario</option>
+                    </select>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group flex-2">
+                        <label>Teléfono Destinatario:</label>
+                        <input type="text" id="dest-phone" placeholder="04141234567" maxlength="11" required>
+                    </div>
+                    <div class="form-group flex-1">
+                        <label>Tipo Doc.:</label>
+                        <select id="dest-doc-type">
+                            <option value="V-">V-</option>
+                            <option value="E-">E-</option>
+                            <option value="J-">J-</option>
+                            <option value="G-">G-</option>
+                        </select>
+                    </div>
+                    <div class="form-group flex-2">
+                        <label>Identificación:</label>
+                        <input type="text" id="dest-id" placeholder="12345678" maxlength="9" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group flex-1">
+                        <label>Monto Acreditar (VES):</label>
+                        <input type="number" id="dest-amount" step="0.01" placeholder="0.00" required>
+                    </div>
+                    <div class="form-group flex-2">
+                        <label>Concepto / Motivo de Pago:</label>
+                        <input type="text" id="dest-concept" placeholder="Ej: Pago de servicios / Transferencia" required>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-pay" id="btn-submit-pay">
+                    <span>Procesar Transacción</span>
+                </button>
+            </form>
+        </section>
+
+        <!-- HISTORIAL DE MOVIMIENTOS -->
+        <section class="history-section">
+            <div class="history-header">
+                <h3>📋 Auditoría de Transacciones en Línea</h3>
+                <span class="tx-count" id="tx-count-badge">0 registros</span>
+            </div>
+            <ul id="transaction-list">
+                <!-- Se llenan con JavaScript -->
+            </ul>
+        </section>
+    </div>
+
+    <!-- MODAL DE COMPROBANTE DIGITAL -->
+    <div id="receipt-modal" class="modal-overlay">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3>Comprobante de Transacción</h3>
+                <span class="success-tag">APROBADO</span>
+            </div>
+            <div class="modal-body" id="receipt-details">
+                <!-- Dinámico -->
+            </div>
+            <button id="btn-close-modal" class="btn-pay">Aceptar</button>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
